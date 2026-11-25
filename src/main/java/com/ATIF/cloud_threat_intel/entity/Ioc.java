@@ -54,4 +54,20 @@ public class Ioc {
     protected void onUpdate() {
         this.lastUpdated = LocalDateTime.now();
     }
+    @Transient
+public String getRiskLevel() {
+    if (riskScore == null) {
+        return "UNASSESSED";
+    }
+
+    if (riskScore >= 80) {
+        return "CRITICAL";
+    } else if (riskScore >= 60) {
+        return "HIGH";
+    } else if (riskScore >= 30) {
+        return "MEDIUM";
+    } else {
+        return "LOW";
+    }
+}
 }
