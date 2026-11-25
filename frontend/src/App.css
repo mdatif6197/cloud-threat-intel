@@ -1,6 +1,14 @@
 
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
 * {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 .app {
@@ -10,6 +18,15 @@
   display: flex;
   font-family: Inter, system-ui, sans-serif;
 }
+
+button,
+input {
+  font: inherit;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .sidebar {
   width: 245px;
@@ -69,11 +86,26 @@
   color: #94a3b8;
   font-size: 13px;
   margin-bottom: 7px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.nav-item:hover:not(:disabled) {
+  background: #172337;
+  color: #5eead4;
 }
 
 .nav-item.active {
   background: #173b3a;
   color: #5eead4;
+}
+
+.nav-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .sidebar-bottom {
@@ -110,6 +142,10 @@
   flex-shrink: 0;
 }
 
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
 .main {
   flex: 1;
   min-width: 0;
@@ -120,6 +156,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
   margin-bottom: 28px;
 }
 
@@ -135,9 +172,14 @@
   margin: 0;
 }
 
+/* =========================================
+   BUTTONS
+========================================= */
+
 .refresh-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 9px;
   background: #173b3a;
   border: 1px solid #28615b;
@@ -145,7 +187,21 @@
   padding: 11px 16px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
 }
+
+.refresh-btn:hover:not(:disabled) {
+  background: #20504b;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   WELCOME SECTION
+========================================= */
 
 .welcome {
   background: linear-gradient(110deg, #123b3a, #172b43);
@@ -177,12 +233,16 @@
 
 .welcome-icon {
   color: #5eead4;
-  opacity: .65;
+  opacity: 0.65;
 }
+
+/* =========================================
+   SIX STATISTICS CARDS
+========================================= */
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 17px;
   margin-bottom: 24px;
 }
@@ -199,11 +259,19 @@
   align-items: center;
   gap: 15px;
   padding: 21px 17px;
+  min-width: 0;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.stat-card:hover {
+  border-color: #28615b;
+  transform: translateY(-2px);
 }
 
 .stat-icon {
   padding: 12px;
   border-radius: 9px;
+  flex-shrink: 0;
 }
 
 .stat-icon.blue {
@@ -235,7 +303,12 @@
 .stat-card h2 {
   font-size: 25px;
   margin: 0;
+  font-variant-numeric: tabular-nums;
 }
+
+/* =========================================
+   CHARTS AND SUMMARY
+========================================= */
 
 .content-grid {
   display: grid;
@@ -246,6 +319,7 @@
 
 .panel {
   padding: 22px;
+  min-width: 0;
 }
 
 .panel-heading {
@@ -316,10 +390,21 @@
   font-size: 15px;
 }
 
-.critical-text { color: #ef4444; }
-.high-text { color: #f97316; }
-.medium-text { color: #eab308; }
-.low-text { color: #22c55e; }
+.critical-text {
+  color: #ef4444;
+}
+
+.high-text {
+  color: #f97316;
+}
+
+.medium-text {
+  color: #eab308;
+}
+
+.low-text {
+  color: #22c55e;
+}
 
 .summary-footer {
   display: flex;
@@ -330,6 +415,10 @@
   margin-top: auto;
   padding-top: 20px;
 }
+
+/* =========================================
+   IOC TABLE
+========================================= */
 
 .table-panel {
   padding: 22px 0 0;
@@ -355,12 +444,17 @@
   color: #64748b;
 }
 
+.search-box:focus-within {
+  border-color: #5eead4;
+}
+
 .search-box input {
   background: transparent;
   border: none;
   outline: none;
   color: #e2e8f0;
   width: 160px;
+  min-width: 0;
 }
 
 .table-wrapper {
@@ -394,6 +488,24 @@ td {
   font-weight: 600;
 }
 
+.indicator-link {
+  background: transparent;
+  border: none;
+  color: #5eead4;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.indicator-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   RISK BADGES
+========================================= */
+
 .risk-badge {
   padding: 5px 9px;
   border-radius: 5px;
@@ -426,6 +538,10 @@ td {
   background: #263449;
 }
 
+/* =========================================
+   UPDATE RISK SCORE
+========================================= */
+
 .update-control {
   display: flex;
   gap: 5px;
@@ -441,6 +557,11 @@ td {
   color: white;
 }
 
+.update-control input:focus {
+  outline: none;
+  border-color: #5eead4;
+}
+
 .update-control button {
   background: #174e48;
   color: #5eead4;
@@ -450,10 +571,18 @@ td {
   cursor: pointer;
 }
 
+.update-control button:hover:not(:disabled) {
+  background: #205c53;
+}
+
 .update-control button:disabled {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* =========================================
+   TABLE FOOTER
+========================================= */
 
 .table-footer {
   padding: 15px 22px;
@@ -476,6 +605,10 @@ td {
   padding: 40px;
 }
 
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
 .error-message {
   background: #48242e;
   border: 1px solid #9f334b;
@@ -486,6 +619,10 @@ td {
   font-size: 12px;
 }
 
+/* =========================================
+   FOOTER
+========================================= */
+
 footer {
   color: #475569;
   text-align: center;
@@ -494,69 +631,10 @@ footer {
   margin: 30px 0 5px;
 }
 
-@media (max-width: 1050px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* =========================================
+   IOC THREAT ANALYSIS DETAIL PAGE
+========================================= */
 
-  .main {
-    padding: 25px 20px;
-  }
-}
-
-@media (max-width: 750px) {
-  .sidebar {
-    display: none;
-  }
-
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .table-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .welcome-icon {
-    display: none;
-  }
-}
-
-@media (max-width: 450px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .topbar h1 {
-    font-size: 20px;
-  }
-
-  .refresh-btn {
-    padding: 9px;
-    font-size: 11px;
-  }
-
-  .main {
-    padding: 20px 12px;
-  }
-}
-/* Clickable IOC indicator */
-.indicator-link {
-  background: transparent;
-  border: none;
-  color: #5eead4;
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-}
-
-.indicator-link:hover {
-  text-decoration: underline;
-}
-
-/* Threat Analysis detail page */
 .threat-detail {
   min-height: 400px;
 }
@@ -645,6 +723,10 @@ footer {
   color: #e2e8f0;
 }
 
+/* =========================================
+   LOADING ANIMATION
+========================================= */
+
 .detail-loading {
   min-height: 250px;
   display: flex;
@@ -665,6 +747,42 @@ footer {
   }
 }
 
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+/* Tablets and smaller laptops */
+@media (max-width: 1050px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .main {
+    padding: 25px 20px;
+  }
+}
+
+/* Mobile and tablet */
+@media (max-width: 750px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .welcome-icon {
+    display: none;
+  }
+}
+
+/* Small mobile screens */
 @media (max-width: 600px) {
   .detail-grid {
     grid-template-columns: 1fr;
@@ -674,4 +792,271 @@ footer {
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .table-footer {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 }
+
+@media (max-width: 450px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar h1 {
+    font-size: 20px;
+  }
+
+  .refresh-btn {
+    padding: 9px;
+    font-size: 11px;
+  }
+
+  .main {
+    padding: 20px 12px;
+  }
+
+  .welcome {
+    padding: 22px 18px;
+  }
+
+  .welcome h2 {
+    font-size: 19px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+}
+
+/* =================================
+   ADVANCED IOC FILTERING
+================================= */
+
+.ioc-filter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.filter-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-select {
+  min-width: 145px;
+  padding: 10px 32px 10px 12px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background: #172033;
+  color: #e2e8f0;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: #3b82f6;
+}
+
+.filter-select option {
+  background: #172033;
+  color: #e2e8f0;
+}
+
+.reset-filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 13px;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.reset-filter-btn:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+  color: #f87171;
+}
+
+.reset-filter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.filter-result-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.filter-result-info strong {
+  color: #e2e8f0;
+}
+
+.active-filter-label {
+  color: #60a5fa;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .ioc-filter-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .filter-controls {
+    width: 100%;
+  }
+
+  .filter-select {
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .reset-filter-btn {
+    width: 100%;
+  }
+
+  .filter-result-info {
+    align-items: flex-start;
+  }
+}
+
+/* CSV EXPORT */
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.export-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.export-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* PAGINATION */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.pagination-info {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.pagination-info strong {
+  color: #e2e8f0;
+}
+
+.pagination-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.page-size-select {
+  padding: 8px 10px;
+  border: 1px solid #334155;
+  border-radius: 7px;
+  background: #172033;
+  color: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+}
+
+.page-btn {
+  padding: 8px 13px;
+  border: 1px solid #334155;
+  border-radius: 7px;
+  background: #172033;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-number {
+  color: #60a5fa;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .pagination-container {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pagination-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
